@@ -1,0 +1,15 @@
+Primero, se importa la biblioteca Deque para trabajar con elementos que sean agregados al final, y luego eliminados al principio
+
+Teniendo esto en cuenta, se crea la clase VentanillaUnica, la cual tiene dos atributos llamados fila que es la encargada de almacenar
+los datos de los ciudadanos (Cedula,Nombre, etc etc) y el atributo tramites.disponibles, que almacena los tramites disponibles para luego
+ser mostrados en pantalla y posteriormente almacenados
+
+Metodo ingresar_ciudadano, agrega los datos del ciudadano (Cedula, nombre), luego imprime en pantalla un pequeño menu el cual muestra 
+en pantalla las multiples opciones de tramite que se estan almacenandos en la clase. Luego se valida que el dato que haya ingresado el
+usuario sea el correcto, se agrega la hora de llegada, y se crea un diccionario de datos y se agrega a la cola
+
+Metodo visualizar_fila no tiene mucho ciencia, simplemente muestra los datos que se van almacenando en la cola, este metodo valida si 
+la cola esta vacia, si no lo esta, convierte la cola en una lista y la ordena por hora de llegada, luego se imprime por hora de llegada
+
+Metodo retirar_ciudadano verifica si hay ciudadanos en la cola, si los hay, los elimina con el metood popleft() e imprime el ciudadano que
+fue atendido
