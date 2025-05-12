@@ -1,16 +1,16 @@
-import heapq  # Importamos heapq para manejar la cola de prioridad
+from collections import deque  # Importamos deque para manejar la cola de vuelos
 
 class Aeropuerto:
     def __init__(self):
-        self.cola_vuelos = []  # Lista que funcionará como cola con prioridad
+        self.cola_vuelos = deque()  # Usamos deque en lugar de una lista
         self.destinos_disponibles = ["Bluefields", "Corn Island", "Panamá", "Miami"]
-        self.tipos_vuelo = ["Comercial", "Carga", "Emergencia"]  # Tipos de vuelo disponibles
+        self.tipos_vuelo = ["Comercial", "Carga", "Emergencia"]
 
     def ingresar_vuelo(self):
         codigo_vuelo = input("Ingrese el código de vuelo: ")
         aerolinea = input("Ingrese la aerolínea: ")
 
-        # Menú para elegir destino
+        # Menú para seleccionar destino
         print("\nSeleccione el destino:")
         for idx, destino in enumerate(self.destinos_disponibles, start=1):
             print(f"{idx}. {destino}")
@@ -26,7 +26,7 @@ class Aeropuerto:
             except ValueError:
                 print("Debe ingresar un número válido.")
 
-        # Menú para elegir tipo de vuelo
+        # Menú para seleccionar tipo de vuelo
         print("\nSeleccione el tipo de vuelo:")
         for idx, tipo in enumerate(self.tipos_vuelo, start=1):
             print(f"{idx}. {tipo}")
@@ -45,8 +45,14 @@ class Aeropuerto:
         # Asignamos la prioridad (0 = Emergencia, 1 = Carga, 2 = Comercial)
         prioridad = 0 if tipo_vuelo == "Emergencia" else (1 if tipo_vuelo == "Carga" else 2)
 
-        # Guardamos el vuelo como una tupla en la cola de prioridad
-        heapq.heappush(self.cola_vuelos, (prioridad, codigo_vuelo, aerolinea, destino, tipo_vuelo))
+        vuelo = {"prioridad": prioridad, "codigo_vuelo": codigo_vuelo, "aerolinea": aerolinea, "destino": destino, "tipo_vuelo": tipo_vuelo}
+        
+        # Insertamos el vuelo en la posición correcta para mantener la prioridad
+        if prioridad == 0:
+            self.cola_vuelos.appendleft(vuelo)  # Los vuelos de emergencia se agregan al inicio
+        else:
+            self.cola_vuelos.append(vuelo)  # Los demás vuelos se agregan al final
+        
         print(f"\nEl vuelo {codigo_vuelo} de {aerolinea} con destino a {destino} ha sido registrado como {tipo_vuelo}.\n")
 
     def visualizar_vuelos(self):
@@ -54,17 +60,16 @@ class Aeropuerto:
             print("\nNo hay vuelos registrados.\n")
         else:
             print("\nLista de vuelos en espera (prioridad más alta primero):")
-            vuelos_ordenados = sorted(self.cola_vuelos, key=lambda x: x[0])  # Ordenamos por prioridad
-            for idx, (_, codigo_vuelo, aerolinea, destino, tipo_vuelo) in enumerate(vuelos_ordenados, start=1):
-                print(f"{idx}. {codigo_vuelo} - {aerolinea} - {destino} - {tipo_vuelo}")
+            for idx, vuelo in enumerate(self.cola_vuelos, start=1):
+                print(f"{idx}. {vuelo['codigo_vuelo']} - {vuelo['aerolinea']} - {vuelo['destino']} - {vuelo['tipo_vuelo']}")
             print()
 
     def autorizar_despegue(self):
         if not self.cola_vuelos:
             print("\nNo hay vuelos en espera para despegar.\n")
         else:
-            _, codigo_vuelo, aerolinea, destino, tipo_vuelo = heapq.heappop(self.cola_vuelos)  # Extraemos el vuelo con mayor prioridad
-            print(f"\nEl vuelo {codigo_vuelo} de {aerolinea} con destino a {destino} ha sido autorizado para despegar.\n")
+            vuelo_autorizado = self.cola_vuelos.popleft()  # Retiramos el primer vuelo en la cola (mayor prioridad)
+            print(f"\nEl vuelo {vuelo_autorizado['codigo_vuelo']} de {vuelo_autorizado['aerolinea']} con destino a {vuelo_autorizado['destino']} ha sido autorizado para despegar.\n")
 
 # Menú interactivo para administrar los vuelos
 def menu():

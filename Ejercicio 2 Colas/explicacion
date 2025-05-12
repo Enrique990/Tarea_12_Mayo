@@ -1,0 +1,9 @@
+El código implementa un sistema de gestión de despegues en un aeropuerto utilizando la estructura de datos deque, 
+que permite una gestión eficiente de la cola de vuelos. Se clasifica cada vuelo según su tipo: Comercial, Carga o 
+Emergencia, asignando prioridad a los vuelos de emergencia para que sean atendidos primero. El programa ofrece un 
+menú interactivo, donde el usuario puede agregar vuelos, visualizar la cola en orden de prioridad y 
+autorizar el siguiente vuelo para despegar**. La prioridad se gestiona agregando los vuelos de emergencia al inicio de la cola 
+con appendleft(), mientras que los vuelos comerciales y de carga se añaden al final con append(). Al autorizar un despegue, 
+se elimina el primer vuelo de la cola con popleft(), asegurando que siempre despeguen los vuelos con mayor prioridad primero. 
+Esta implementación proporciona una solución dinámica y eficiente para la administración de vuelos, garantizando un flujo ordenado y 
+una experiencia de usuario intuitiva. 
