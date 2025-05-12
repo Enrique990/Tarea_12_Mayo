@@ -28,7 +28,7 @@ class PilaSacos:
         return len(self.sacos) == 0
 
     def mostrar_sacos(self):
-        print("  CONTENIDO ACTUAL DEL CAMIÓN:")
+        print(" CONTENIDO ACTUAL DEL CAMIÓN:")
         if self.esta_vacia():
             print("  El camión está vacío.\n")
         else:

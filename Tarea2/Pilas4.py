@@ -33,7 +33,7 @@ class CentroDistribucion:
 
     def salir_camion(self):
         if not self.cola_camiones:
-            print("  SALIDA FALLIDA: No hay camiones para descargar.\n")
+            print(" SALIDA FALLIDA: No hay camiones para descargar.\n")
             return None
         camion = self.cola_camiones.popleft()
         print(f"  SALIDA: Camión atendido y descargado -> {camion}\n")

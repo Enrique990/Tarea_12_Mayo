@@ -41,7 +41,7 @@ class CentroSalud:
         if not self.cola_pacientes:
             print("\n  La cola está vacía.\n")
         else:
-            print("\n  COLA DE PACIENTES:\n")
+            print("\n COLA DE PACIENTES:\n")
             for i, paciente in enumerate(self.cola_pacientes, start=1):
                 print(f"{i}. {paciente}")
             print()
